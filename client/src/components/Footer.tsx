@@ -1,5 +1,6 @@
 import { Github, Linkedin, Twitter } from 'lucide-react';
 import { trackExternalLink } from '@/lib/analytics';
+import { useReveal } from '@/hooks/useReveal';
 
 const socialLinks = [
   { name: 'GitHub', icon: Github, url: 'https://github.com' },
@@ -9,20 +10,26 @@ const socialLinks = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { ref, isRevealed } = useReveal({ threshold: 0.5 });
 
   return (
-    <footer className="py-12 border-t border-border">
+    <footer ref={ref} className="py-12 border-t border-border">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div 
+          className={`flex flex-col md:flex-row items-center justify-between gap-6 reveal ${isRevealed ? 'revealed' : ''}`}
+        >
           <div className="flex items-center gap-4">
-            {socialLinks.map((link) => (
+            {socialLinks.map((link, index) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackExternalLink(link.name.toLowerCase(), 'footer')}
-                className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                className={`icon-animate p-2 text-muted-foreground hover:text-foreground transition-all duration-300 ${
+                  isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
                 data-testid={`link-social-${link.name.toLowerCase()}`}
               >
                 <link.icon className="h-5 w-5" />
@@ -31,7 +38,13 @@ export function Footer() {
             ))}
           </div>
 
-          <p className="text-sm text-muted-foreground" data-testid="text-copyright">
+          <p 
+            className={`text-sm text-muted-foreground transition-all duration-500 ${
+              isRevealed ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ transitionDelay: '300ms' }}
+            data-testid="text-copyright"
+          >
             © {currentYear} Alex Chen. All rights reserved.
           </p>
         </div>
