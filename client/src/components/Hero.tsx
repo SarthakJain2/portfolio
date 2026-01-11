@@ -2,12 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { trackCTAClick, trackNavClick } from '@/lib/analytics';
 
-function useTypewriter(text: string, speed: number, delay: number, onComplete?: () => void) {
+function useTypewriter(text: string, speed: number, shouldStart: boolean, onComplete?: () => void) {
   const [displayText, setDisplayText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
   const hasStarted = useRef(false);
 
   useEffect(() => {
+    if (!shouldStart || hasStarted.current) return;
+    
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     if (prefersReducedMotion) {
@@ -17,60 +19,56 @@ function useTypewriter(text: string, speed: number, delay: number, onComplete?: 
       return;
     }
 
-    if (hasStarted.current) return;
     hasStarted.current = true;
-
     let currentIndex = 0;
     let timeoutId: NodeJS.Timeout;
 
-    const startTyping = () => {
-      const typeChar = () => {
+    const typeChar = () => {
+      if (currentIndex <= text.length) {
+        setDisplayText(text.substring(0, currentIndex));
+        currentIndex++;
         if (currentIndex <= text.length) {
-          setDisplayText(text.substring(0, currentIndex));
-          currentIndex++;
-          if (currentIndex <= text.length) {
-            timeoutId = setTimeout(typeChar, speed);
-          } else {
-            setIsComplete(true);
-            onComplete?.();
-          }
+          timeoutId = setTimeout(typeChar, speed);
+        } else {
+          setIsComplete(true);
+          onComplete?.();
         }
-      };
-      typeChar();
+      }
     };
-
-    timeoutId = setTimeout(startTyping, delay);
+    
+    typeChar();
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [shouldStart]);
 
   return { displayText, isComplete };
 }
 
 export function Hero() {
-  const [showBio, setShowBio] = useState(false);
+  const [startName, setStartName] = useState(false);
+  const [startBio, setStartBio] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setStartName(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const { displayText: nameText, isComplete: nameComplete } = useTypewriter(
     'Alex Chen',
     100,
-    500,
-    () => setTimeout(() => setShowBio(true), 300)
+    startName,
+    () => setTimeout(() => setStartBio(true), 400)
   );
 
   const { displayText: bioText, isComplete: bioComplete } = useTypewriter(
     'Crafting elegant solutions to complex problems. Specializing in full-stack development, system design, and developer experience.',
     18,
-    0,
+    startBio,
+    () => setTimeout(() => setShowButtons(true), 300)
   );
-
-  useEffect(() => {
-    if (bioComplete) {
-      setTimeout(() => setShowButtons(true), 200);
-    }
-  }, [bioComplete]);
 
   return (
     <section className="min-h-screen flex flex-col justify-center relative overflow-hidden">
@@ -105,14 +103,14 @@ export function Hero() {
           
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-balance min-h-[1.2em]">
             <span>{nameText}</span>
-            {!nameComplete && (
+            {startName && !nameComplete && (
               <span className="inline-block w-[4px] h-[0.85em] bg-foreground ml-2 animate-pulse align-baseline" />
             )}
           </h1>
           
-          <div className={`max-w-xl min-h-[5em] md:min-h-[4em] transition-opacity duration-500 ${showBio ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="max-w-xl min-h-[5em] md:min-h-[4em]">
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              {showBio && (
+              {startBio && (
                 <>
                   <span>{bioText}</span>
                   <span className="inline-block w-[2px] h-[1em] bg-muted-foreground ml-0.5 animate-pulse align-baseline" />
