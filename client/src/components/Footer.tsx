@@ -1,0 +1,41 @@
+import { Github, Linkedin, Twitter } from 'lucide-react';
+import { trackExternalLink } from '@/lib/analytics';
+
+const socialLinks = [
+  { name: 'GitHub', icon: Github, url: 'https://github.com' },
+  { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com' },
+  { name: 'Twitter', icon: Twitter, url: 'https://twitter.com' },
+];
+
+export function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="py-12 border-t border-border">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            {socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackExternalLink(link.name.toLowerCase(), 'footer')}
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                data-testid={`link-social-${link.name.toLowerCase()}`}
+              >
+                <link.icon className="h-5 w-5" />
+                <span className="sr-only">{link.name}</span>
+              </a>
+            ))}
+          </div>
+
+          <p className="text-sm text-muted-foreground" data-testid="text-copyright">
+            © {currentYear} Alex Chen. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
