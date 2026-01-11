@@ -1,16 +1,76 @@
+import { useState, useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { trackCTAClick, trackNavClick } from '@/lib/analytics';
-import { useTypewriterSequence } from '@/hooks/useTypewriter';
+
+function useTypewriter(text: string, speed: number, delay: number, onComplete?: () => void) {
+  const [displayText, setDisplayText] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
+  const hasStarted = useRef(false);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      setDisplayText(text);
+      setIsComplete(true);
+      onComplete?.();
+      return;
+    }
+
+    if (hasStarted.current) return;
+    hasStarted.current = true;
+
+    let currentIndex = 0;
+    let timeoutId: NodeJS.Timeout;
+
+    const startTyping = () => {
+      const typeChar = () => {
+        if (currentIndex <= text.length) {
+          setDisplayText(text.substring(0, currentIndex));
+          currentIndex++;
+          if (currentIndex <= text.length) {
+            timeoutId = setTimeout(typeChar, speed);
+          } else {
+            setIsComplete(true);
+            onComplete?.();
+          }
+        }
+      };
+      typeChar();
+    };
+
+    timeoutId = setTimeout(startTyping, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return { displayText, isComplete };
+}
 
 export function Hero() {
-  const { displayTexts, isComplete, currentIndex } = useTypewriterSequence({
-    items: [
-      { text: 'Alex Chen', speed: 80 },
-      { text: 'Crafting elegant solutions to complex problems. Specializing in full-stack development, system design, and developer experience.', speed: 20 },
-    ],
-    initialDelay: 600,
-    delayBetween: 400,
-  });
+  const [showBio, setShowBio] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
+
+  const { displayText: nameText, isComplete: nameComplete } = useTypewriter(
+    'Alex Chen',
+    100,
+    500,
+    () => setTimeout(() => setShowBio(true), 300)
+  );
+
+  const { displayText: bioText, isComplete: bioComplete } = useTypewriter(
+    'Crafting elegant solutions to complex problems. Specializing in full-stack development, system design, and developer experience.',
+    18,
+    0,
+  );
+
+  useEffect(() => {
+    if (bioComplete) {
+      setTimeout(() => setShowButtons(true), 200);
+    }
+  }, [bioComplete]);
 
   return (
     <section className="min-h-screen flex flex-col justify-center relative overflow-hidden">
@@ -44,25 +104,26 @@ export function Hero() {
           </p>
           
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-balance min-h-[1.2em]">
-            {displayTexts[0]}
-            {currentIndex === 0 && !isComplete && (
-              <span className="inline-block w-[3px] h-[0.9em] bg-foreground ml-1 animate-pulse" />
+            <span>{nameText}</span>
+            {!nameComplete && (
+              <span className="inline-block w-[4px] h-[0.85em] bg-foreground ml-2 animate-pulse align-baseline" />
             )}
           </h1>
           
-          <p className="max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed min-h-[4em] md:min-h-[3em]">
-            {displayTexts[1]}
-            {currentIndex === 1 && !isComplete && (
-              <span className="inline-block w-[2px] h-[1em] bg-muted-foreground ml-0.5 animate-pulse" />
-            )}
-            {isComplete && (
-              <span className="inline-block w-[2px] h-[1em] bg-muted-foreground ml-0.5 animate-pulse" />
-            )}
-          </p>
+          <div className={`max-w-xl min-h-[5em] md:min-h-[4em] transition-opacity duration-500 ${showBio ? 'opacity-100' : 'opacity-0'}`}>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              {showBio && (
+                <>
+                  <span>{bioText}</span>
+                  <span className="inline-block w-[2px] h-[1em] bg-muted-foreground ml-0.5 animate-pulse align-baseline" />
+                </>
+              )}
+            </p>
+          </div>
 
           <div 
             className={`flex flex-wrap gap-4 pt-4 transition-all duration-700 ${
-              isComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              showButtons ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
             }`}
           >
             <a
@@ -89,7 +150,7 @@ export function Hero() {
         href="#about"
         onClick={() => trackNavClick('about', 'hero')}
         className={`absolute bottom-12 left-1/2 -translate-x-1/2 p-2 text-muted-foreground hover:text-foreground transition-all duration-500 ${
-          isComplete ? 'opacity-100 animate-float' : 'opacity-0'
+          showButtons ? 'opacity-100 animate-float' : 'opacity-0'
         }`}
         data-testid="link-scroll-down"
       >
