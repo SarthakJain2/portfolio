@@ -3,8 +3,8 @@ import { useReveal } from '@/hooks/useReveal';
 const experiences = [
   {
     id: 1,
-    role: 'Incoming Software Engineer Intern',
-    company: 'Robinhood',
+    role: 'Senior Software Engineer',
+    company: 'TechCorp',
     companyUrl: 'https://example.com',
     period: '2022 — Present',
     description: 'Leading the development of the core platform infrastructure, improving system reliability and reducing latency by 40%. Mentoring junior engineers and driving adoption of best practices.',
@@ -52,23 +52,25 @@ function ExperienceItem({ exp, index }: { exp: typeof experiences[0]; index: num
           style={{ transitionDelay: `${index * 150 + 200}ms` }}
         />
         
-        <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-3">
-          <h3 className="text-lg font-medium">
-            {exp.role}{' '}
-            <span className="text-muted-foreground">@</span>{' '}
-            <a 
-              href={exp.companyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-animate text-foreground"
-              data-testid={`link-company-${exp.id}`}
-            >
-              {exp.company}
-            </a>
-          </h3>
-          <span className="text-sm font-mono text-muted-foreground">
-            {exp.period}
-          </span>
+        <div className="mb-3">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-lg font-medium">
+              {exp.role}{' '}
+              <span className="text-muted-foreground">@</span>{' '}
+              <a 
+                href={exp.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline decoration-transparent hover:decoration-current transition-all duration-300 decoration-1 underline-offset-2"
+                data-testid={`link-company-${exp.id}`}
+              >
+                {exp.company}
+              </a>
+            </h3>
+            <span className="text-sm font-mono text-muted-foreground">
+              {exp.period}
+            </span>
+          </div>
         </div>
         
         <p className="text-muted-foreground leading-relaxed mb-4">
