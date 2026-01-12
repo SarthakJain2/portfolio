@@ -42,7 +42,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium">hello@alexchen.dev</p>
+                  <p className="font-medium">sjain1@seas.upenn.edu</p>
                 </div>
               </a>
 
@@ -55,7 +55,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium" data-testid="text-location">San Francisco, CA</p>
+                  <p className="font-medium" data-testid="text-location">New York City, NY</p>
                 </div>
               </div>
             </div>
@@ -65,7 +65,7 @@ export function Contact() {
               style={{ transitionDelay: '300ms' }}
             >
               <a
-                href="mailto:hello@alexchen.dev?subject=Hello from your portfolio"
+                href="mailto:sjain1@seas.upenn.edu?subject=Hello from your portfolio"
                 onClick={() => trackContactAction('send_message')}
                 className="btn-animate inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full text-sm font-medium"
                 data-testid="button-send-message"

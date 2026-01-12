@@ -46,7 +46,7 @@ export function Resume() {
               </a>
               <a
                 href={resumeUrl}
-                download="Alex_Chen_Resume.pdf"
+                download="Sarthak_Jain_Resume.pdf"
                 onClick={() => trackResumeAction('download')}
                 className="btn-animate inline-flex items-center gap-2 px-6 py-3 border border-border rounded-full text-sm font-medium hover:bg-accent hover:border-muted-foreground/30"
                 data-testid="button-download-resume"
@@ -60,7 +60,7 @@ export function Resume() {
               className={`text-xs text-muted-foreground mt-6 reveal ${isRevealed ? 'revealed' : ''}`}
               style={{ transitionDelay: '300ms' }}
             >
-              Note: This is a placeholder. Replace with your actual resume file.
+
             </p>
           </div>
         </div>

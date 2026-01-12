@@ -57,7 +57,7 @@ export function Hero() {
   }, []);
 
   const { displayText: nameText, isComplete: nameComplete } = useTypewriter(
-    'Alex Chen',
+    'Sarthak Jain',
     100,
     startName,
     () => setTimeout(() => setStartBio(true), 400)

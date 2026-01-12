@@ -3,8 +3,8 @@ import { useReveal } from '@/hooks/useReveal';
 const experiences = [
   {
     id: 1,
-    role: 'Senior Software Engineer',
-    company: 'TechCorp',
+    role: 'Incoming Software Engineer Intern',
+    company: 'Robinhood',
     companyUrl: 'https://example.com',
     period: '2022 — Present',
     description: 'Leading the development of the core platform infrastructure, improving system reliability and reducing latency by 40%. Mentoring junior engineers and driving adoption of best practices.',

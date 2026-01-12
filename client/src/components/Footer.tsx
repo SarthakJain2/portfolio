@@ -3,9 +3,9 @@ import { trackExternalLink } from '@/lib/analytics';
 import { useReveal } from '@/hooks/useReveal';
 
 const socialLinks = [
-  { name: 'GitHub', icon: Github, url: 'https://github.com' },
-  { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com' },
-  { name: 'Twitter', icon: Twitter, url: 'https://twitter.com' },
+  { name: 'GitHub', icon: Github, url: 'https://github.com/SarthakJain2' },
+  { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/sarthak-jain2/' },
+  { name: 'Twitter', icon: Twitter, url: 'https://x.com/sarthak_jain1' },
 ];
 
 export function Footer() {
@@ -45,7 +45,7 @@ export function Footer() {
             style={{ transitionDelay: '300ms' }}
             data-testid="text-copyright"
           >
-            © {currentYear} Alex Chen. All rights reserved.
+            © {currentYear} Sarthak Jain. All rights reserved.
           </p>
         </div>
       </div>
