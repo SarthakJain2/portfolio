@@ -72,18 +72,37 @@ export function Hero() {
 
   return (
     <section className="min-h-screen flex flex-col justify-center relative overflow-hidden">
-      {/* Animated mesh gradient background */}
+      {/* Animated gradient background - different colors for light/dark */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background" />
+        
+        {/* Light mode: warm, soft gradients */}
         <div 
-          className="absolute w-[800px] h-[800px] -top-[400px] -right-[200px] rounded-full opacity-30 dark:opacity-15 blur-3xl animate-gradient"
+          className="absolute w-[800px] h-[800px] -top-[400px] -right-[200px] rounded-full opacity-20 dark:opacity-0 blur-3xl animate-gradient transition-opacity duration-500"
+          style={{
+            background: 'linear-gradient(135deg, hsl(210 40% 85%) 0%, hsl(230 30% 88%) 50%, hsl(200 35% 90%) 100%)',
+            backgroundSize: '200% 200%',
+          }}
+        />
+        <div 
+          className="absolute w-[600px] h-[600px] -bottom-[200px] -left-[200px] rounded-full opacity-15 dark:opacity-0 blur-3xl animate-gradient transition-opacity duration-500"
+          style={{
+            background: 'linear-gradient(225deg, hsl(220 30% 88%) 0%, hsl(240 25% 92%) 50%, hsl(210 35% 87%) 100%)',
+            backgroundSize: '200% 200%',
+            animationDelay: '-7s',
+          }}
+        />
+        
+        {/* Dark mode: deeper, moodier gradients */}
+        <div 
+          className="absolute w-[800px] h-[800px] -top-[400px] -right-[200px] rounded-full opacity-0 dark:opacity-15 blur-3xl animate-gradient transition-opacity duration-500"
           style={{
             background: 'linear-gradient(135deg, hsl(240 5% 25%) 0%, hsl(280 10% 20%) 50%, hsl(220 15% 25%) 100%)',
             backgroundSize: '200% 200%',
           }}
         />
         <div 
-          className="absolute w-[600px] h-[600px] -bottom-[200px] -left-[200px] rounded-full opacity-25 dark:opacity-10 blur-3xl animate-gradient"
+          className="absolute w-[600px] h-[600px] -bottom-[200px] -left-[200px] rounded-full opacity-0 dark:opacity-10 blur-3xl animate-gradient transition-opacity duration-500"
           style={{
             background: 'linear-gradient(225deg, hsl(200 10% 30%) 0%, hsl(240 8% 22%) 50%, hsl(260 12% 25%) 100%)',
             backgroundSize: '200% 200%',
