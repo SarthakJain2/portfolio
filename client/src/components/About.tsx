@@ -4,7 +4,7 @@ export function About() {
   const { ref: sectionRef, isRevealed } = useReveal({ threshold: 0.2 });
   const { ref: techRef, isRevealed: techRevealed } = useReveal({ threshold: 0.3 });
 
-  const technologies = ['TypeScript', 'React', 'Node.js', 'Python', 'PostgreSQL', 'Redis', 'AWS', 'Docker'];
+  const technologies = ['C++', 'Java', 'Python', 'SQL', 'TypeScript', 'JavaScript', 'React.js', 'AWS', 'Docker', 'RestAPI', 'Git', 'PyTorch', 'Pandas', 'NumPy'];
 
   return (
     <section id="about" className="py-24 md:py-32">
@@ -26,27 +26,22 @@ export function About() {
               style={{ transitionDelay: '100ms' }}
               data-testid="text-about-intro"
             >
-              I'm a software engineer with 8+ years of experience building products 
-              that people love to use. I care deeply about craft, performance, and 
-              the small details that make software feel truly polished.
+              I’m a software engineer who enjoys turning complex problems into simple,               reliable solutions. I care about building software that’s not just                     functional, but thoughtfully designed and easy to work with over time.
             </p>
             
             <p 
               className={`text-lg text-muted-foreground leading-relaxed reveal ${isRevealed ? 'revealed' : ''}`}
               style={{ transitionDelay: '200ms' }}
             >
-              Currently, I focus on building scalable systems and improving developer 
-              experience. I believe great software comes from understanding both the 
-              technical challenges and the human needs behind them.
+              I spend most of my time building scalable backend systems and full-stack               applications, with experience in AI/ML engineering and system design.                   I’m particularly interested in developer experience and how good                       tooling can make teams more effective.
+
             </p>
 
             <p 
               className={`text-lg text-muted-foreground leading-relaxed reveal ${isRevealed ? 'revealed' : ''}`}
               style={{ transitionDelay: '300ms' }}
             >
-              When I'm not coding, you'll find me exploring new places, reading 
-              about design systems, or tinkering with side projects that may never 
-              see the light of day.
+              When I’m not coding, I enjoy exploring new ideas, working on side                      projects, and learning from different areas of technology and design.
             </p>
 
             <div 

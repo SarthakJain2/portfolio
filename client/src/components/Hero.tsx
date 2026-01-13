@@ -64,7 +64,7 @@ export function Hero() {
   );
 
   const { displayText: bioText, isComplete: bioComplete } = useTypewriter(
-    'Crafting elegant solutions to complex problems. Specializing in full-stack development, system design, and developer experience.',
+    'Crafting elegant solutions to complex problems. Specializing in backend and full-stack development, AI/ML engineering, system design, and developer experience.',
     18,
     startBio,
     () => setTimeout(() => setShowButtons(true), 300)

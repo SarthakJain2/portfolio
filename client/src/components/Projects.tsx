@@ -70,18 +70,6 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
               <Github className="h-4 w-4" />
             </a>
           )}
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackProjectClick(project.title, 'demo')}
-              className="icon-animate p-1.5 text-muted-foreground hover:text-foreground"
-              data-testid={`link-project-demo-${project.id}`}
-            >
-              <ExternalLink className="h-4 w-4" />
-            </a>
-          )}
         </div>
       </div>
 
