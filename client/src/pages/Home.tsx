@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
@@ -11,12 +12,13 @@ import { Footer } from '@/components/Footer';
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'Alex Chen | Software Engineer';
+    document.title = 'Sarthak Jain | Software Engineer';
   }, []);
 
   return (
     <>
       <Analytics />
+      <SpeedInsights />
       <div className="min-h-screen">
         <Header />
         <main>
