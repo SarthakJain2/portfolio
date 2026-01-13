@@ -7,8 +7,8 @@ const experiences = [
     company: 'Robinhood',
     companyUrl: 'https://robinhood.com/',
     period: 'September 2026 - December 2026',
-    description: 'Leading the development of the core platform infrastructure, improving system reliability and reducing latency by 40%. Mentoring junior engineers and driving adoption of best practices.',
-    highlights: ['System Design', 'Team Leadership', 'Performance'],
+    description: 'Incoming Fall 2026 intern focused on building scalable, high-impact systems for consumer finance and investing platforms.',
+    highlights: ['Distributed Systems', 'Product Engineering', 'Reliability at Scale'],
   },
   {
     id: 2,
@@ -16,8 +16,8 @@ const experiences = [
     company: 'Amazon Web Services (AWS)',
     companyUrl: 'https://aws.amazon.com/',
     period: 'May 2025 — August 2025',
-    description: 'Built and scaled the main product from 0 to 100k users. Designed and implemented real-time collaboration features and payment infrastructure.',
-    highlights: ['Full-Stack', 'Product Development', 'Scaling'],
+    description: 'Built an end-to-end internal reporting platform that scaled data delivery across teams, automating high-volume report access and migrating large datasets from DynamoDB to Redshift to support reliable, self-serve analytics.',
+    highlights: ['Java', 'System Design', 'Scaling', 'Full-Stack Development'],
   },
   {
     id: 3,
@@ -25,8 +25,8 @@ const experiences = [
     company: 'Machine Learning Lab',
     companyUrl: 'http://www.wanghao.in/',
     period: 'December 2023 — May 2025',
-    description: 'Developed responsive web applications for clients across various industries. Focused on accessibility, performance optimization, and modern UI patterns.',
-    highlights: ['React', 'Accessibility', 'UI/UX'],
+    description: 'Researched the limits of symbolic reasoning in large language models by contributing to the MMLU-SR benchmark and evaluating state-of-the-art models published at EMNLP GenBench.',
+    highlights: ['Python', 'LLM Evaluation', 'AI Research'],
   },
   {
     id: 4,
@@ -34,8 +34,8 @@ const experiences = [
     company: 'Rutgers Rail and Transit Lab',
     companyUrl: 'https://rail.rutgers.edu/#/home',
     period: 'September 2023 — May 2025',
-    description: 'Developed responsive web applications for clients across various industries. Focused on accessibility, performance optimization, and modern UI patterns.',
-    highlights: ['React', 'Accessibility', 'UI/UX'],
+    description: 'Applied computer vision and full-stack tooling to real-world rail safety problems, contributing to a published research paper on AI-driven infrastructure monitoring.',
+    highlights: ['Python', 'Computer Vision', 'Applied AI', 'Real-World Systems'],
   },
   {
     id: 5,
@@ -43,8 +43,8 @@ const experiences = [
     company: 'Gateway (Acquired by Circle)',
     companyUrl: 'https://www.circle.com/',
     period: 'June 2024 - August 2024',
-    description: 'Developed responsive web applications for clients across various industries. Focused on accessibility, performance optimization, and modern UI patterns.',
-    highlights: ['React', 'Accessibility', 'UI/UX'],
+    description: 'Worked on core Web3 protocol infrastructure, building zero-knowledge rollups and developer tooling to issue and consume verifiable credentials at scale.',
+    highlights: ['Rust', 'Web3 Infrastructure', 'Developer Experience', 'Protocol Engineering'],
   },
 ];
 
