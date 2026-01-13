@@ -11,8 +11,10 @@ function useTypewriter(text: string, speed: number, shouldStart: boolean, onComp
     if (!shouldStart || hasStarted.current) return;
     
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
     
-    if (prefersReducedMotion) {
+    // Skip animation on reduced motion preference or mobile devices
+    if (prefersReducedMotion || isMobile) {
       setDisplayText(text);
       setIsComplete(true);
       onComplete?.();
@@ -21,14 +23,17 @@ function useTypewriter(text: string, speed: number, shouldStart: boolean, onComp
 
     hasStarted.current = true;
     let currentIndex = 0;
-    let timeoutId: NodeJS.Timeout;
+    let animationId: number;
 
     const typeChar = () => {
       if (currentIndex <= text.length) {
         setDisplayText(text.substring(0, currentIndex));
         currentIndex++;
         if (currentIndex <= text.length) {
-          timeoutId = setTimeout(typeChar, speed);
+          // Use requestAnimationFrame with setTimeout for smoother animation
+          animationId = requestAnimationFrame(() => {
+            setTimeout(() => typeChar(), speed);
+          });
         } else {
           setIsComplete(true);
           onComplete?.();
@@ -39,7 +44,7 @@ function useTypewriter(text: string, speed: number, shouldStart: boolean, onComp
     typeChar();
 
     return () => {
-      clearTimeout(timeoutId);
+      cancelAnimationFrame(animationId);
     };
   }, [shouldStart]);
 
@@ -65,35 +70,29 @@ export function Hero() {
 
   const { displayText: bioText, isComplete: bioComplete } = useTypewriter(
     'Crafting elegant solutions to complex problems. Specializing in backend and full-stack development, AI/ML engineering, system design, and developer experience.',
-    18,
+    28,
     startBio,
     () => setTimeout(() => setShowButtons(true), 300)
   );
 
   return (
     <section className="min-h-screen flex flex-col justify-center relative overflow-hidden">
-      {/* Animated mesh gradient background */}
+      {/* Static gradient background - optimized for mobile/Safari */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background" />
         <div 
-          className="absolute w-[800px] h-[800px] -top-[400px] -right-[200px] rounded-full opacity-30 dark:opacity-15 blur-3xl animate-gradient"
+          className="absolute w-[600px] h-[600px] -top-[300px] -right-[150px] rounded-full opacity-20 dark:opacity-10"
           style={{
-            background: 'linear-gradient(135deg, hsl(240 5% 25%) 0%, hsl(280 10% 20%) 50%, hsl(220 15% 25%) 100%)',
-            backgroundSize: '200% 200%',
+            background: 'radial-gradient(circle, hsl(240 5% 25%) 0%, transparent 70%)',
           }}
         />
         <div 
-          className="absolute w-[600px] h-[600px] -bottom-[200px] -left-[200px] rounded-full opacity-25 dark:opacity-10 blur-3xl animate-gradient"
+          className="absolute w-[500px] h-[500px] -bottom-[150px] -left-[150px] rounded-full opacity-15 dark:opacity-8"
           style={{
-            background: 'linear-gradient(225deg, hsl(200 10% 30%) 0%, hsl(240 8% 22%) 50%, hsl(260 12% 25%) 100%)',
-            backgroundSize: '200% 200%',
-            animationDelay: '-7s',
+            background: 'radial-gradient(circle, hsl(220 8% 28%) 0%, transparent 70%)',
           }}
         />
       </div>
-      
-      {/* Grain overlay */}
-      <div className="absolute inset-0 grain pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-6 py-32 relative z-10">
         <div className="space-y-6">
