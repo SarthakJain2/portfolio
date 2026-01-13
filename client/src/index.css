@@ -169,40 +169,24 @@
   50% { transform: translateY(-8px); }
 }
 
-/* Animation Classes - GPU accelerated for Safari */
+/* Animation Classes */
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
-  transform: translateZ(0);
-  will-change: opacity;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .animate-fade-in-up {
   opacity: 0;
   animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  transform: translateZ(0);
-  will-change: opacity, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .animate-fade-in-left {
   opacity: 0;
   animation: fadeInLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  transform: translateZ(0);
-  will-change: opacity, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .animate-scale-in {
   opacity: 0;
   animation: scaleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  transform: translateZ(0);
-  will-change: opacity, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .animate-slide-down {
@@ -220,10 +204,6 @@
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
-  transform: translateZ(0);
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 /* Stagger Delays */
@@ -236,17 +216,14 @@
 .stagger-7 { animation-delay: 0.7s; }
 .stagger-8 { animation-delay: 0.8s; }
 
-/* Interactive Element Transitions (GPU accelerated for Safari) */
+/* Interactive Element Transitions */
 .hover-lift {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), 
               box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px) translateZ(0);
+  transform: translateY(-4px);
   box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
 }
 
@@ -266,14 +243,11 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
-/* Button Animations (GPU accelerated for Safari) */
+/* Button Animations */
 .btn-animate {
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .btn-animate::before {
@@ -318,16 +292,13 @@
   width: 100%;
 }
 
-/* Card Animations (GPU accelerated for Safari) */
+/* Card Animations */
 .card-animate {
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .card-animate:hover {
-  transform: translateY(-6px) translateZ(0);
+  transform: translateY(-6px);
   border-color: hsl(var(--muted-foreground) / 0.3);
 }
 
@@ -380,66 +351,54 @@
   opacity: 0.04;
 }
 
-/* Gradient Orbs - Subtle Background Elements (GPU accelerated for Safari) */
+/* Gradient Orbs - Subtle Background Elements */
 .gradient-orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.15;
   pointer-events: none;
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .dark .gradient-orb {
   opacity: 0.08;
 }
 
-/* Scroll-triggered animations via IntersectionObserver (GPU accelerated for Safari) */
+/* Scroll-triggered animations via IntersectionObserver */
 .reveal {
   opacity: 0;
-  transform: translateY(30px) translateZ(0);
+  transform: translateY(30px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .reveal.revealed {
   opacity: 1;
-  transform: translateY(0) translateZ(0);
+  transform: translateY(0);
 }
 
 .reveal-left {
   opacity: 0;
-  transform: translateX(-30px) translateZ(0);
+  transform: translateX(-30px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .reveal-left.revealed {
   opacity: 1;
-  transform: translateX(0) translateZ(0);
+  transform: translateX(0);
 }
 
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.95) translateZ(0);
+  transform: scale(0.95);
   transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .reveal-scale.revealed {
   opacity: 1;
-  transform: scale(1) translateZ(0);
+  transform: scale(1);
 }
 
 /* Reduced Motion Support */
