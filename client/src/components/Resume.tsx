@@ -56,12 +56,6 @@ export function Resume() {
               </a>
             </div>
 
-            <p 
-              className={`text-xs text-muted-foreground mt-6 reveal ${isRevealed ? 'revealed' : ''}`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              Note: This is a placeholder. Replace with your actual resume file.
-            </p>
           </div>
         </div>
       </div>
