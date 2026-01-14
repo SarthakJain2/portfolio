@@ -31,7 +31,7 @@ export function Contact() {
 
             <div ref={cardsRef} className="space-y-4">
               <a
-                href="mailto:hello@alexchen.dev"
+                href="mailto:sjain1@seas.upenn.edu"
                 onClick={() => trackContactAction('email')}
                 className={`card-animate flex items-center gap-4 p-4 bg-card border border-border rounded-lg group reveal ${cardsRevealed ? 'revealed' : ''}`}
                 style={{ transitionDelay: '100ms' }}
